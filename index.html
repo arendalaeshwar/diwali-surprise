@@ -1,0 +1,872 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Diwali - Special Surprise</title>
+
+<style>
+
+/* GENERAL STYLING */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, serif;
+    color: white;
+    background: linear-gradient(135deg, #17002b, #4b0870, #a51c45);
+    text-align: center;
+    overflow-x: hidden;
+}
+
+#fireworks {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+/* INTRO SCREEN */
+
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    background: radial-gradient(circle, #720b57, #19002e);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1.3s ease, visibility 1.3s;
+}
+
+#intro.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#intro h1 {
+    color: gold;
+    font-size: clamp(27px, 5vw, 45px);
+    text-shadow: 0 0 20px orange;
+    margin: 20px;
+}
+
+#diya {
+    font-size: 115px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 0 12px orange);
+    transition: 0.5s;
+    animation: diyaGlow 2s infinite alternate;
+}
+
+#diya:hover {
+    transform: scale(1.15);
+}
+
+#diya.lit {
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 45px gold);
+}
+
+@keyframes diyaGlow {
+    from {
+        filter: drop-shadow(0 0 8px orange);
+    }
+    to {
+        filter: drop-shadow(0 0 35px gold);
+    }
+}
+
+#intro p {
+    color: #ffe8aa;
+    font-size: 18px;
+    margin: 15px;
+}
+
+.start-btn {
+    background: linear-gradient(45deg, gold, orange);
+    color: #42002b;
+    border: none;
+    border-radius: 30px;
+    padding: 13px 30px;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+
+/* MAIN CONTAINER */
+
+.container {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 1050px;
+    margin: auto;
+    padding: 25px 10px;
+}
+
+
+/* HEADER */
+
+header {
+    padding: 50px 10px;
+}
+
+header h1 {
+    color: gold;
+    font-size: clamp(35px, 7vw, 65px);
+    text-shadow: 0 0 20px orange;
+    animation: headingGlow 2s infinite alternate;
+}
+
+header p {
+    color: #ffe6a6;
+    font-size: 20px;
+    margin-top: 18px;
+}
+
+@keyframes headingGlow {
+    from {
+        text-shadow: 0 0 10px orange;
+    }
+    to {
+        text-shadow: 0 0 35px gold, 0 0 50px orange;
+    }
+}
+
+
+/* WISH CARD */
+
+.wish-card {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,215,0,0.6);
+    border-radius: 22px;
+    padding: 35px 22px;
+    margin: 25px auto;
+    box-shadow: 0 0 25px rgba(255,165,0,0.2);
+}
+
+.wish-card h2 {
+    color: gold;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.wish-card p {
+    color: #fff1d0;
+    font-size: 19px;
+    line-height: 1.9;
+}
+
+
+/* PHOTO GALLERY */
+
+.gallery-section {
+    margin-top: 55px;
+}
+
+.gallery-section h2 {
+    color: gold;
+    font-size: 32px;
+    margin-bottom: 28px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.photo-card {
+    padding: 8px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 3px solid gold;
+    box-shadow: 0 0 18px rgba(255,215,0,0.4);
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px gold;
+}
+
+.photo-card p {
+    color: #ffe5a0;
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+
+/* PERSONAL VOICE MESSAGE */
+
+.voice-section {
+    margin: 55px auto;
+    padding: 35px 22px;
+    background: rgba(255,255,255,0.12);
+    border: 2px solid gold;
+    border-radius: 22px;
+    box-shadow: 0 0 25px rgba(255,215,0,0.2);
+}
+
+.voice-section h2 {
+    color: gold;
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.voice-section p {
+    color: #fff1d0;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+.voice-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.voice-player {
+    width: 100%;
+    max-width: 450px;
+    margin: 15px auto;
+    display: block;
+}
+
+.voice-caption {
+    color: #ffe6a6;
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+
+/* CLOSING MESSAGE */
+
+.closing {
+    margin: 60px auto 35px;
+    padding: 35px 20px;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid gold;
+    border-radius: 22px;
+}
+
+.closing h2 {
+    color: gold;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.closing p {
+    color: #fff1d0;
+    font-size: 19px;
+    line-height: 1.9;
+}
+
+
+/* DIVIDER */
+
+.divider {
+    color: gold;
+    font-size: 28px;
+    margin: 25px;
+}
+
+
+/* MUSIC BUTTON */
+
+#musicToggle {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 30;
+    background: gold;
+    color: #35002c;
+    border: none;
+    border-radius: 30px;
+    padding: 13px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 15px orange;
+}
+
+
+/* FOOTER */
+
+footer {
+    position: relative;
+    z-index: 1;
+    padding: 30px 10px;
+    color: #ffe5a0;
+    font-size: 16px;
+}
+
+
+/* MOBILE RESPONSIVENESS */
+
+@media(max-width: 600px) {
+
+    .wish-card p,
+    .closing p,
+    .voice-section p {
+        font-size: 16px;
+    }
+
+    .gallery img {
+        height: 230px;
+    }
+
+    .wish-card h2,
+    .closing h2,
+    .gallery-section h2,
+    .voice-section h2 {
+        font-size: 26px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<!-- FIREWORKS BACKGROUND -->
+
+<canvas id="fireworks"></canvas>
+
+
+<!-- INTRO SCREEN -->
+
+<div id="intro">
+
+    <h1>✨ A Special Diwali Surprise ✨</h1>
+
+    <button id="diya" onclick="startCelebration()">
+        🪔
+    </button>
+
+    <p>Tap the diya to light up your celebration!</p>
+
+    <button class="start-btn" onclick="startCelebration()">
+        Light the Diya ✨
+    </button>
+
+</div>
+
+
+<!-- BACKGROUND MUSIC -->
+
+<audio id="bgMusic" loop preload="auto">
+
+    <source src="Chalrey Chalrey Waal _ Chalre Chalre Waal.mp3" type="audio/mpeg">
+
+</audio>
+
+
+<!-- MUSIC CONTROL -->
+
+<button id="musicToggle" onclick="toggleMusic()">
+    🔊 Music ON/OFF
+</button>
+
+
+<!-- MAIN WEBSITE -->
+
+<main class="container">
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>🪔 Happy Diwali! 🪔</h1>
+
+        <p>
+            May your life shine brighter than a thousand diyas!
+        </p>
+
+    </header>
+
+
+    <div class="divider">
+        ✨ 🪔 ✨
+    </div>
+
+
+    <!-- PERSONAL WISH -->
+
+    <section class="wish-card">
+
+        <h2>Dear Friend ❤️</h2>
+
+        <p>
+
+            Wishing you and your family a very Happy Diwali!
+
+            May this beautiful festival of lights bring endless
+            happiness, success, good health and prosperity into
+            your life.
+
+            May every diya remove darkness from your life and
+            every firework bring new reasons to smile.
+
+            Keep smiling, keep shining and achieve everything
+            you dream of!
+
+            <br><br>
+
+            You deserve all the happiness in the world. ❤️
+
+        </p>
+
+    </section>
+
+
+    <!-- PHOTO GALLERY -->
+
+    <section class="gallery-section">
+
+        <h2>📸 Our Beautiful Memories ❤️</h2>
+
+        <div class="gallery">
+
+            <!-- PHOTO 1 -->
+
+            <div class="photo-card">
+
+                <img src="799673167_2221451241734696_6499325036101896168_n.jpg"
+                     alt="Our first memory">
+
+                <p>Beautiful Memory ❤️</p>
+
+            </div>
+
+
+            <!-- PHOTO 2 -->
+
+            <div class="photo-card">
+
+                <img src="800398697_1389230503301745_3114571205793791274_n.jpg"
+                     alt="Our second memory">
+
+                <p>Unforgettable Moments ✨</p>
+
+            </div>
+
+
+            <!-- PHOTO 3 -->
+
+            <div class="photo-card">
+
+                <img src="WhatsApp Image 2026-11-08 at 22.50.16.jpeg"
+                     alt="Our third memory">
+
+                <p>Always Keep Smiling 😊</p>
+
+            </div>
+
+
+            <!-- PHOTO 4 -->
+
+            <div class="photo-card">
+
+                <img src="797479214_1727374035043758_5588788492851538511_n.jpg"
+                     alt="Our fourth memory">
+
+                <p>Friendship Forever ❤️</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider">
+        🌸 ✨ 🪔 ✨ 🌸
+    </div>
+
+
+    <!-- PERSONAL VOICE MESSAGE -->
+
+    <section class="voice-section">
+
+        <div class="voice-icon">
+            🎙️
+        </div>
+
+        <h2>A Special Voice Message For You ❤️</h2>
+
+        <p>
+
+            Words are not always enough to express how special
+            someone is.
+
+            So, I have a little surprise for you!
+
+            Put on your headphones and listen to my
+            personal Diwali wishes. 💖
+
+        </p>
+
+
+        <!-- SEPARATE VOICE AUDIO PLAYER -->
+
+        <audio class="voice-player" controls preload="metadata">
+
+            <source src="WhatsApp Audio 2026-11-08 at 23.01.52.mp4"
+                    type="audio/mpeg">
+
+            Your browser does not support audio playback.
+
+        </audio>
+
+
+        <div class="voice-caption">
+
+            🎧 A little voice note, specially for you!
+
+        </div>
+
+    </section>
+
+
+    <div class="divider">
+        ✨ 💖 ✨
+    </div>
+
+
+    <!-- CLOSING MESSAGE -->
+
+    <section class="closing">
+
+        <h2>✨ A Little Message for You ✨</h2>
+
+        <p>
+
+            Life becomes more beautiful when we have wonderful
+            friends like you.
+
+            Thank you for being a part of my journey and for
+            giving me so many beautiful memories.
+
+            I hope this Diwali brings new beginnings, unlimited
+            happiness and countless blessings into your life.
+
+            <br><br>
+
+            May our friendship always shine like these Diwali lights.
+
+            <br><br>
+
+            💖 Once Again, Happy Diwali! 💖
+
+        </p>
+
+    </section>
+
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    Made with ❤️ and lots of Diwali lights!
+
+    <br><br>
+
+    🪔 शुभ दीपावली 🪔
+
+</footer>
+
+
+
+<script>
+
+/* ====================================
+   1. DIYA OPENING AND BACKGROUND MUSIC
+==================================== */
+
+let started = false;
+
+function startCelebration() {
+
+    if (started) return;
+
+    started = true;
+
+    const diya = document.getElementById("diya");
+    const intro = document.getElementById("intro");
+    const music = document.getElementById("bgMusic");
+    const musicButton = document.getElementById("musicToggle");
+
+    // Light the diya
+
+    diya.classList.add("lit");
+
+    // Start background music
+
+    music.volume = 0.5;
+
+    music.play().then(() => {
+
+        musicButton.innerText = "🔊 Music ON";
+
+    }).catch(error => {
+
+        musicButton.innerText = "🔇 Play Music";
+
+        console.log("Audio playback failed:", error);
+
+    });
+
+
+    // Opening fireworks
+
+    for (let i = 0; i < 12; i++) {
+
+        setTimeout(() => {
+
+            createFirework(
+                Math.random() * window.innerWidth,
+                Math.random() * window.innerHeight * 0.7
+            );
+
+        }, i * 200);
+
+    }
+
+
+    // Hide intro
+
+    setTimeout(() => {
+
+        intro.classList.add("hide");
+
+    }, 1400);
+
+}
+
+
+/* ====================================
+   2. BACKGROUND MUSIC PLAY / PAUSE
+==================================== */
+
+function toggleMusic() {
+
+    const music = document.getElementById("bgMusic");
+    const button = document.getElementById("musicToggle");
+
+    if (music.paused) {
+
+        music.play().then(() => {
+
+            button.innerText = "🔊 Music ON";
+
+        }).catch(error => {
+
+            button.innerText = "🔇 Play Music";
+
+            console.log("Audio playback failed:", error);
+
+        });
+
+    } else {
+
+        music.pause();
+
+        button.innerText = "🔇 Music OFF";
+
+    }
+
+}
+
+
+/* ====================================
+   3. FIREWORKS CANVAS
+==================================== */
+
+const canvas = document.getElementById("fireworks");
+
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+
+
+function resizeCanvas() {
+
+    canvas.width = window.innerWidth;
+
+    canvas.height = window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener("resize", resizeCanvas);
+
+
+/* ====================================
+   4. CREATE FIREWORKS
+==================================== */
+
+function createFirework(x, y) {
+
+    const colors = [
+
+        "#ffcc00",
+        "#ff3399",
+        "#00ffff",
+        "#ff6600",
+        "#cc66ff",
+        "#ffffff",
+        "#00ff88"
+
+    ];
+
+    const color = colors[
+        Math.floor(Math.random() * colors.length)
+    ];
+
+
+    for (let i = 0; i < 75; i++) {
+
+        const angle = Math.random() * Math.PI * 2;
+
+        const speed = Math.random() * 5 + 1;
+
+        particles.push({
+
+            x: x,
+
+            y: y,
+
+            vx: Math.cos(angle) * speed,
+
+            vy: Math.sin(angle) * speed,
+
+            alpha: 1,
+
+            radius: Math.random() * 3 + 1,
+
+            color: color
+
+        });
+
+    }
+
+}
+
+
+/* ====================================
+   5. ANIMATE FIREWORKS
+==================================== */
+
+function animateFireworks() {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+
+        const p = particles[i];
+
+        p.x += p.vx;
+
+        p.y += p.vy;
+
+        p.vy += 0.035;
+
+        p.alpha -= 0.012;
+
+
+        ctx.globalAlpha = Math.max(0, p.alpha);
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.radius,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle = p.color;
+
+        ctx.fill();
+
+
+        if (p.alpha <= 0) {
+
+            particles.splice(i, 1);
+
+        }
+
+    }
+
+
+    ctx.globalAlpha = 1;
+
+    requestAnimationFrame(animateFireworks);
+
+}
+
+animateFireworks();
+
+
+/* ====================================
+   6. AUTOMATIC FIREWORKS
+==================================== */
+
+setInterval(() => {
+
+    if (started) {
+
+        createFirework(
+
+            Math.random() * canvas.width,
+
+            Math.random() * canvas.height * 0.65
+
+        );
+
+    }
+
+}, 1800);
+
+
+</script>
+
+</body>
+</html>
