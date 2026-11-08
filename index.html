@@ -41,80 +41,6 @@ body {
 }
 
 
-/* INTRO SCREEN */
-
-#intro {
-    position: fixed;
-    inset: 0;
-    z-index: 20;
-    background: radial-gradient(circle, #720b57, #19002e);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 1.3s ease, visibility 1.3s;
-}
-
-#intro.hide {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-#intro h1 {
-    color: gold;
-    font-size: clamp(27px, 5vw, 45px);
-    text-shadow: 0 0 20px orange;
-    margin: 20px;
-}
-
-#diya {
-    font-size: 115px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    filter: drop-shadow(0 0 12px orange);
-    transition: 0.5s;
-    animation: diyaGlow 2s infinite alternate;
-}
-
-#diya:hover {
-    transform: scale(1.15);
-}
-
-#diya.lit {
-    transform: scale(1.3);
-    filter: drop-shadow(0 0 45px gold);
-}
-
-@keyframes diyaGlow {
-    from {
-        filter: drop-shadow(0 0 8px orange);
-    }
-    to {
-        filter: drop-shadow(0 0 35px gold);
-    }
-}
-
-#intro p {
-    color: #ffe8aa;
-    font-size: 18px;
-    margin: 15px;
-}
-
-.start-btn {
-    background: linear-gradient(45deg, gold, orange);
-    color: #42002b;
-    border: none;
-    border-radius: 30px;
-    padding: 13px 30px;
-    font-size: 17px;
-    font-weight: bold;
-    margin-top: 15px;
-    cursor: pointer;
-}
-
-
 /* MAIN CONTAINER */
 
 .container {
@@ -363,25 +289,6 @@ footer {
 <canvas id="fireworks"></canvas>
 
 
-<!-- INTRO SCREEN -->
-
-<div id="intro">
-
-    <h1>✨ A Special Diwali Surprise ✨</h1>
-
-    <button id="diya" onclick="startCelebration()">
-        🪔
-    </button>
-
-    <p>Tap the diya to light up your celebration!</p>
-
-    <button class="start-btn" onclick="startCelebration()">
-        Light the Diya ✨
-    </button>
-
-</div>
-
-
 <!-- BACKGROUND MUSIC -->
 
 <audio id="bgMusic" loop preload="auto">
@@ -394,7 +301,7 @@ footer {
 <!-- MUSIC CONTROL -->
 
 <button id="musicToggle" onclick="toggleMusic()">
-    🔊 Music ON/OFF
+    🔇 Play Music
 </button>
 
 
@@ -543,7 +450,7 @@ footer {
         <audio class="voice-player" controls preload="metadata">
 
             <source src="WhatsApp Audio 2026-11-08 at 23.01.52.mp4"
-                    type="audio/mpeg">
+                    type="audio/mp4">
 
             Your browser does not support audio playback.
 
@@ -614,72 +521,7 @@ footer {
 <script>
 
 /* ====================================
-   1. DIYA OPENING AND BACKGROUND MUSIC
-==================================== */
-
-let started = false;
-
-function startCelebration() {
-
-    if (started) return;
-
-    started = true;
-
-    const diya = document.getElementById("diya");
-    const intro = document.getElementById("intro");
-    const music = document.getElementById("bgMusic");
-    const musicButton = document.getElementById("musicToggle");
-
-    // Light the diya
-
-    diya.classList.add("lit");
-
-    // Start background music
-
-    music.volume = 0.5;
-
-    music.play().then(() => {
-
-        musicButton.innerText = "🔊 Music ON";
-
-    }).catch(error => {
-
-        musicButton.innerText = "🔇 Play Music";
-
-        console.log("Audio playback failed:", error);
-
-    });
-
-
-    // Opening fireworks
-
-    for (let i = 0; i < 12; i++) {
-
-        setTimeout(() => {
-
-            createFirework(
-                Math.random() * window.innerWidth,
-                Math.random() * window.innerHeight * 0.7
-            );
-
-        }, i * 200);
-
-    }
-
-
-    // Hide intro
-
-    setTimeout(() => {
-
-        intro.classList.add("hide");
-
-    }, 1400);
-
-}
-
-
-/* ====================================
-   2. BACKGROUND MUSIC PLAY / PAUSE
+   1. BACKGROUND MUSIC PLAY / PAUSE
 ==================================== */
 
 function toggleMusic() {
@@ -713,7 +555,7 @@ function toggleMusic() {
 
 
 /* ====================================
-   3. FIREWORKS CANVAS
+   2. FIREWORKS CANVAS
 ==================================== */
 
 const canvas = document.getElementById("fireworks");
@@ -737,7 +579,7 @@ window.addEventListener("resize", resizeCanvas);
 
 
 /* ====================================
-   4. CREATE FIREWORKS
+   3. CREATE FIREWORKS
 ==================================== */
 
 function createFirework(x, y) {
@@ -789,7 +631,7 @@ function createFirework(x, y) {
 
 
 /* ====================================
-   5. ANIMATE FIREWORKS
+   4. ANIMATE FIREWORKS
 ==================================== */
 
 function animateFireworks() {
@@ -846,23 +688,25 @@ animateFireworks();
 
 
 /* ====================================
-   6. AUTOMATIC FIREWORKS
+   5. AUTOMATIC FIREWORKS
 ==================================== */
 
-setInterval(() => {
-
-    if (started) {
-
+// Show fireworks as soon as the main website opens.
+for (let i = 0; i < 8; i++) {
+    setTimeout(() => {
         createFirework(
-
             Math.random() * canvas.width,
-
             Math.random() * canvas.height * 0.65
-
         );
+    }, i * 250);
+}
 
-    }
-
+// Continue showing fireworks automatically.
+setInterval(() => {
+    createFirework(
+        Math.random() * canvas.width,
+        Math.random() * canvas.height * 0.65
+    );
 }, 1800);
 
 
